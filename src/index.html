@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dist/output.css">
+    <title>Instagram</title>
+</head>
+
+<body class="m-0 p-0 w-full h-full ">
+    <div class="w-full h-full">
+        <div id="feeds" class="flex flex-col items-center gap-4 p-8 bg-white relative"></div>
+    </div>
+    <script>
+        feeds = [{
+                feed_id: 1,
+                username: "roses_are_rosie",
+                photo: "./images/rose.jpeg",
+                caption: "blink",
+                likes: 7596347,
+                date: new Date("08/10/2022")
+            },
+            {
+                feed_id: 2,
+                username: "sooyaaa_",
+                photo: "./images/jisoo.jpeg",
+                caption: "blink",
+                likes: 7596347,
+                date: new Date("08/10/2022")
+            },
+            {
+                feed_id: 3,
+                username: "lalalalisa_m",
+                photo: "./images/lisa.jpeg",
+                caption: "blink",
+                likes: 7596347,
+                date: new Date("08/10/2022")
+            },
+            {
+                feed_id: 3,
+                username: "jennierubyjane",
+                photo: "./images/jenni.jpeg",
+                caption: "blink",
+                likes: 7596347,
+                date: new Date("08/10/2022")
+            },
+        ]
+
+        const container = document.getElementById('feeds');
+        feeds.forEach((feed) => {
+            let postedDate = feed.date;
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let yyyy = today.getFullYear();
+            today = new Date(mm + '/' + dd + '/' + yyyy);
+            let diff_time = today.getTime() - postedDate.getTime();
+            let diff_days = diff_time / (1000 * 3600 * 24);
+
+            const content = `<div id="feed_user" class="border border-gray-300 w-[300px] sm:w-[450px] rounded-xl">
+                <div class="flex flex-row justify-between items-center p-3 border-b border-gray-300">
+                    <div class="flex flex-row items-center gap-4">
+                        <div class="w-9 h-9 bg-blue-300 text-white rounded-full"></div>
+                        <div class="text-sm">${feed.username}</div>
+                    </div>
+                    <img src="./images/more.png" alt="icon more" class="h-5 w-auto"/>
+                </div>
+                <div>
+                    <img src="${feed.photo}" alt="postingan user" class="w-full h-auto"/>
+                </div>
+                <div class="flex flex-col gap-3 p-4 pb-6">
+                    <div class="flex flex-row justify-between items-center">
+                        <div class="flex flex-row items-center gap-4">
+                            <img src="./images/like.png" alt="icon like" class="h-5 w-auto"/>
+                            <img src="./images/comment.png" alt="icon comment" class="h-5 w-auto"/>
+                            <img src="./images/send.png" alt="icon send" class="h-5 w-auto"/>
+                        </div>
+                        <img src="./images/bookmark.png" alt="icon bookmark" class="h-5 w-auto"/>
+                    </div>
+                    <div class="text-sm font-bold">${feed.likes} likes</div>
+                    <div class="flex flex-row gap-2">
+                        <span class="text-sm font-bold">${feed.username}</span>
+                        <span class="text-sm truncate">${feed.caption}</span>
+                    </div>
+                    <div class="text-xs uppercase">${diff_days} days ago</div>
+                </div>
+                <div class="flex flex-row items-center gap-4 p-3 border-t border-gray-300 w-full">
+                    <img src="./images/smile.png" alt="icon smile" class="h-5 w-auto"/>
+                    <input class="w-full text-sm border-none focus:outline-none p-1" placeholder="Add a comment..."/>
+                    <button class="text-sm font-bold text-blue-400">Post</button>
+                </div>
+            </div>`;
+            container.innerHTML += content;
+        });
+    </script>
+
+</body>
+
+</html>
